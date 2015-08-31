@@ -1,0 +1,33 @@
+.title
+  color: #ccc
+  text-align: center
+
+.containter
+  width: 500px
+  height: @width
+  margin: 0 auto
+  background: black
+
+.row
+  display: -webkit-flex;
+  display: flex;
+
+.cell
+  height: 100%
+  -webkit-flex: 1;
+  flex: 1;
+
+.live
+  position: relative
+
+.live
+  &:after
+    content: ''
+    position: absolute
+    left: 2px
+    top: @left
+    right: @left
+    bottom: @left
+    background: white
+    border-radius: 100%
+
