@@ -2,31 +2,6 @@
   color: #ccc;
   text-align: center;
 }
-.containter {
-  width: 500px;
-  height: 500px;
+.canvas-container {
   margin: 0 auto;
-  background: #000;
-}
-.row {
-  display: -webkit-flex;
-  display: flex;
-}
-.cell {
-  height: 100%;
-  -webkit-flex: 1;
-  flex: 1;
-}
-.live {
-  position: relative;
-}
-.live:after {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 2px;
-  right: 2px;
-  bottom: 2px;
-  background: #fff;
-  border-radius: 100%;
 }

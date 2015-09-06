@@ -7,10 +7,11 @@
 </head>
 <body>
   <h1 class="title">Conway's Game of Life</h1>
-  <div class="containter"></div>
+  <canvas id="canvas" width="300" height="300"></canvas>
+  <script src="./fabric.min.js"></script>
   <script src="./app.js"></script>
   <script type="text/javascript">
-    init();
+    init(50, 50, 'canvas');
   </script>
 </body>
 </html>

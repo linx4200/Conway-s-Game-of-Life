@@ -1,11 +1,18 @@
-function init() {
-  var cells = genCells(50, 50);
-  draw(cells, 10, 10);
+function init(m, n, canvasId) {
+  var cells = genCells(m, n);
+  var canvas = new fabric.Canvas(canvasId, {
+    width: m * 10,
+    height: n * 10,
+    backgroundColor: 'rgb(0,0,0)',
+  });
+  canvas.renderOnAddRemove = false;
+
+  draw(cells, canvas);
 
   setInterval(function () {
-    clear();
+    canvas.clear();
     cells = nextGen(cells);
-    draw(cells, 10, 10);
+    draw(cells, canvas);
   }, 100);
 }
 
@@ -20,27 +27,23 @@ function genCells(m, n) {
   return cells;
 }
 
-function draw(cells, m, n) {
-  var cont = document.querySelector('.containter');
-  var fragment = document.createDocumentFragment();
-  var rowH = 500 / cells.length;
-  cells.map(function (r, i) {
-    var row = document.createElement('div');
-    row.classList.add('row');
-    row.style.height = rowH + 'px';
-    r.map(function (c, j) {
-      var cell = document.createElement('div');
-      cell.classList.add('cell');
-      if (c) cell.classList.add('live');
-      row.appendChild(cell);
-    });
-    fragment.appendChild(row);
+function newCell (top, left, live) {
+  return new fabric.Circle({
+    radius : 5,
+    left : left,
+    top: top,
+    fill : live ? 'white' : 'black'
   });
-  cont.appendChild(fragment);
 }
 
-function clear() {
-  document.querySelector('.containter').innerHTML = '';
+function draw(cells, canvas) {
+  cells.map(function (r, i) {
+    r.map(function (c, j) {
+      var cell = newCell(i * 10, j * 10, c);
+      canvas.add(cell);
+    });
+  });
+  canvas.renderAll();
 }
 
 function nextGen(cells) {
@@ -80,7 +83,6 @@ function liveOrDead(cells, map) {
   }
   return nextGen;
 }
-
 
 function genMap(cells) {
   var map = [];
